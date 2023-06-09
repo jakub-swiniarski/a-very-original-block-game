@@ -7,9 +7,11 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Player extends Entity{
     OrthographicCamera cam;
+    static int currentBlock;
     public Player(){
         img=new Texture(Gdx.files.internal("entities/steve.png"));
         cam = new OrthographicCamera(1280,720);
+        currentBlock=1;
     }
 
     public void update(){
@@ -18,8 +20,15 @@ public class Player extends Entity{
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !Gdx.input.isKeyPressed(Input.Keys.LEFT)){
             rect.x+=5;
         }
-        else if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
             rect.x-=5;
+        }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
+            currentBlock=1;
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.NUM_2)){
+            currentBlock=2;
         }
     }
 }
