@@ -25,10 +25,10 @@ public class MC2D extends ApplicationAdapter {
 		steve=new Player();
 		dirt=new ArrayList<Dirt>();
 		for(int i=0; i<17; i++){ //not 16, bc additional column of blocks is needed
-			for(int j=0; j<3; j++){
+			for(int j=0; j<5; j++){
 				Dirt newDirt= new Dirt();
 				newDirt.rect.x=i*80-1280/2;
-				newDirt.rect.y=j*80-240;
+				newDirt.rect.y=j*80-5*80;
 				dirt.add(newDirt);
 			}
 		}
@@ -58,7 +58,12 @@ public class MC2D extends ApplicationAdapter {
 				dirt.remove(i);
 			}
 
-			batch.draw(dirt.get(i).img,dirt.get(i).rect.x,dirt.get(i).rect.y);	//DO NOT DISPLAY IF NOT CONTAINED IN CAM
+			if(dirt.get(i).rect.x+dirt.get(i).rect.width>steve.cam.position.x-steve.cam.viewportWidth/2 &&
+			dirt.get(i).rect.x<steve.cam.position.x+steve.cam.viewportWidth/2 &&
+			dirt.get(i).rect.y+dirt.get(i).rect.width>steve.cam.position.y-steve.cam.viewportHeight/2 &&
+			dirt.get(i).rect.y<steve.cam.position.y+steve.cam.viewportHeight/2){
+				batch.draw(dirt.get(i).img,dirt.get(i).rect.x,dirt.get(i).rect.y);	//DO NOT DISPLAY IF NOT CONTAINED IN CAM
+			}
 		}
 		batch.end();
 
