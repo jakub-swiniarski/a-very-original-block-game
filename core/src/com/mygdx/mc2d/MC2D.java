@@ -68,6 +68,23 @@ public class MC2D extends ApplicationAdapter {
 		mousePos=new Vector3(Gdx.input.getX(),Gdx.input.getY(),0);
 		steve.cam.unproject(mousePos);
 
+		steve.gridX=(int)Math.floor(mousePos.x/80)*80;
+		steve.gridY=(int)Math.floor(mousePos.y/80)*80;
+		if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT)){
+			if(steve.currentBlock==1){
+				Dirt newDirt= new Dirt();
+				newDirt.rect.x=steve.gridX;
+				newDirt.rect.y=steve.gridY;
+				dirt.add(newDirt);
+			}
+			if(steve.currentBlock==2){
+				Grass newGrass= new Grass();
+				newGrass.rect.x=steve.gridX;
+				newGrass.rect.y=steve.gridY;
+				grass.add(newGrass);
+			}
+		}
+
 		batch.setProjectionMatrix(steve.cam.combined);
 		batch.begin();
 		batch.draw(steve.img,steve.rect.x,steve.rect.y);

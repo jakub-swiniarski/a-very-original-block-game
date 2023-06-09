@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class Player extends Entity{
     OrthographicCamera cam;
     static int currentBlock;
+    int gridX,gridY;
     public Player(){
         img=new Texture(Gdx.files.internal("entities/steve.png"));
         cam = new OrthographicCamera(1280,720);
