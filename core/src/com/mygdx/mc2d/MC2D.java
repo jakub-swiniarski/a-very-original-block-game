@@ -11,12 +11,14 @@ public class MC2D extends ApplicationAdapter {
 	SpriteBatch batch;
 	boolean fullscreen;
 	Player steve;
-	
+	Dirt dirt;
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		fullscreen=false;
 		steve=new Player();
+		dirt=new Dirt();
 	}
 
 	@Override
@@ -29,16 +31,21 @@ public class MC2D extends ApplicationAdapter {
 			Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		}
 		else{
-			Gdx.graphics.setWindowedMode(1600,900);
+			Gdx.graphics.setWindowedMode(1280,720);
 		}
 		batch.begin();
 		batch.draw(steve.img,steve.rect.x,steve.rect.y);
+		batch.draw(dirt.img,dirt.rect.x,dirt.rect.y);
 		batch.end();
+
+		steve.checkForInput();
+		dirt.checkForInteraction();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
 		steve.img.dispose();
+		dirt.img.dispose();
 	}
 }
