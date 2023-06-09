@@ -12,6 +12,6 @@ public class Entity {
         rect.width=80;
         rect.height=80;
         rect.x=0;
-        rect.y=240;
+        rect.y=0;
     }
 }
