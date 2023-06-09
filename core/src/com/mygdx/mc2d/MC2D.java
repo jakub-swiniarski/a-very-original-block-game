@@ -39,7 +39,7 @@ public class MC2D extends ApplicationAdapter {
 		for(int i=0; i<16; i++){ //not 16, bc additional column of blocks is needed
 			for(int j=0; j<3; j++){
 				Dirt newDirt= new Dirt();
-				newDirt.rect.x=i*80-1280/2+40;
+				newDirt.rect.x=i*80-1280/2;
 				newDirt.rect.y=j*80-4*80;
 				dirt.add(newDirt);
 			}
