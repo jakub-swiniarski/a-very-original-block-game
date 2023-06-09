@@ -22,7 +22,7 @@ public class MC2D extends ApplicationAdapter {
 		fullscreen=false;
 		steve=new Player();
 		dirt=new ArrayList<Dirt>();
-		for(int i=0; i<16; i++){
+		for(int i=0; i<17; i++){ //not 16, bc additional column of blocks is needed
 			for(int j=0; j<3; j++){
 				Dirt newDirt= new Dirt();
 				newDirt.rect.x=i*80;
@@ -47,8 +47,11 @@ public class MC2D extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(steve.img,steve.rect.x,steve.rect.y);
 		for(int i=0; i<dirt.size();i++){
+			if(dirt.get(i).rect.contains(Gdx.input.getX(),720-Gdx.input.getY()) && Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+				dirt.remove(i);
+			}
+
 			batch.draw(dirt.get(i).img,dirt.get(i).rect.x,dirt.get(i).rect.y);
-			dirt.get(i).checkForInteraction();
 		}
 		batch.end();
 

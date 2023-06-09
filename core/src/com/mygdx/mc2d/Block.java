@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 public class Block {
     Rectangle rect;
     Texture img;
+    int id;
 
     public Block(){
         rect=new Rectangle();
@@ -15,11 +16,5 @@ public class Block {
         rect.height=80;
         rect.x=0;
         rect.y=0;
-    }
-
-    public void checkForInteraction(){
-        if(rect.contains(Gdx.input.getX(),720-Gdx.input.getY()) && Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-            System.out.println("collision detected");
-        }
     }
 }
