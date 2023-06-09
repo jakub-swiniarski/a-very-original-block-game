@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.World;
@@ -24,6 +25,7 @@ public class MC2D extends ApplicationAdapter {
 	List<Grass> grass;
 	Vector3 mousePos;
 	Icon icon;
+	Rectangle grid;
 
 	@Override
 	public void create () {
@@ -50,6 +52,9 @@ public class MC2D extends ApplicationAdapter {
 			newGrass.rect.y=3*80-4*80;
 			grass.add(newGrass);
 		}
+		grid= new Rectangle();
+		grid.width=80;
+		grid.height=80;
 	}
 
 	@Override
@@ -70,7 +75,9 @@ public class MC2D extends ApplicationAdapter {
 
 		steve.gridX=(int)Math.floor(mousePos.x/80)*80;
 		steve.gridY=(int)Math.floor(mousePos.y/80)*80;
-		if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT)){
+		grid.x=steve.gridX;
+		grid.y=steve.gridY;
+		if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && !grid.overlaps(steve.rect)){
 			if(steve.currentBlock==1){
 				Dirt newDirt= new Dirt();
 				newDirt.rect.x=steve.gridX;
