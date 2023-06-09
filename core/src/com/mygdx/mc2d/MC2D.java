@@ -16,6 +16,7 @@ public class MC2D extends ApplicationAdapter {
 	boolean fullscreen;
 	Player steve;
 	List<Dirt> dirt;
+	List<Grass> grass;
 	Vector3 mousePos;
 
 	@Override
@@ -24,13 +25,21 @@ public class MC2D extends ApplicationAdapter {
 		fullscreen=false;
 		steve=new Player();
 		dirt=new ArrayList<Dirt>();
-		for(int i=0; i<17; i++){ //not 16, bc additional column of blocks is needed
-			for(int j=0; j<5; j++){
+		for(int i=0; i<16; i++){ //not 16, bc additional column of blocks is needed
+			for(int j=0; j<3; j++){
 				Dirt newDirt= new Dirt();
 				newDirt.rect.x=i*80-1280/2;
-				newDirt.rect.y=j*80-5*80;
+				newDirt.rect.y=j*80-4*80;
 				dirt.add(newDirt);
 			}
+		}
+
+		grass=new ArrayList<Grass>();
+		for(int i=0; i<16; i++){
+			Grass newGrass= new Grass();
+			newGrass.rect.x=i*80-1280/2;
+			newGrass.rect.y=3*80-4*80;
+			grass.add(newGrass);
 		}
 	}
 
@@ -58,11 +67,24 @@ public class MC2D extends ApplicationAdapter {
 				dirt.remove(i);
 			}
 
-			if(dirt.get(i).rect.x+dirt.get(i).rect.width>steve.cam.position.x-steve.cam.viewportWidth/2 &&
+			else if(dirt.get(i).rect.x+dirt.get(i).rect.width>steve.cam.position.x-steve.cam.viewportWidth/2 &&
 			dirt.get(i).rect.x<steve.cam.position.x+steve.cam.viewportWidth/2 &&
 			dirt.get(i).rect.y+dirt.get(i).rect.width>steve.cam.position.y-steve.cam.viewportHeight/2 &&
 			dirt.get(i).rect.y<steve.cam.position.y+steve.cam.viewportHeight/2){
-				batch.draw(dirt.get(i).img,dirt.get(i).rect.x,dirt.get(i).rect.y);	//DO NOT DISPLAY IF NOT CONTAINED IN CAM
+				batch.draw(dirt.get(i).img,dirt.get(i).rect.x,dirt.get(i).rect.y);
+			}
+		}
+
+		for(int i=0; i<grass.size();i++) {
+			if(grass.get(i).rect.contains(mousePos.x,mousePos.y) && Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+				grass.remove(i);
+			}
+
+			else if(grass.get(i).rect.x+grass.get(i).rect.width>steve.cam.position.x-steve.cam.viewportWidth/2 &&
+					grass.get(i).rect.x<steve.cam.position.x+steve.cam.viewportWidth/2 &&
+					grass.get(i).rect.y+grass.get(i).rect.width>steve.cam.position.y-steve.cam.viewportHeight/2 &&
+					grass.get(i).rect.y<steve.cam.position.y+steve.cam.viewportHeight/2) {
+				batch.draw(grass.get(i).img, grass.get(i).rect.x, grass.get(i).rect.y);
 			}
 		}
 		batch.end();
@@ -76,6 +98,9 @@ public class MC2D extends ApplicationAdapter {
 		steve.img.dispose();
 		for(int i=0; i<dirt.size();i++){
 			dirt.get(i).img.dispose();
+		}
+		for(int i=0; i<grass.size();i++){
+			grass.get(i).img.dispose();
 		}
 	}
 }
