@@ -48,7 +48,7 @@ public class MC2D extends ApplicationAdapter {
 		grass=new ArrayList<Grass>();
 		for(int i=0; i<16; i++){
 			Grass newGrass= new Grass();
-			newGrass.rect.x=i*80-1280/2+40;
+			newGrass.rect.x=i*80-1280/2;
 			newGrass.rect.y=3*80-4*80;
 			grass.add(newGrass);
 		}
