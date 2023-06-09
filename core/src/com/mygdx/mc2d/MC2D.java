@@ -7,18 +7,29 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MC2D extends ApplicationAdapter {
 	SpriteBatch batch;
 	boolean fullscreen;
 	Player steve;
-	Dirt dirt;
+	List<Dirt> dirt;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		fullscreen=false;
 		steve=new Player();
-		dirt=new Dirt();
+		dirt=new ArrayList<Dirt>();
+		for(int i=0; i<16; i++){
+			for(int j=0; j<3; j++){
+				Dirt newDirt= new Dirt();
+				newDirt.rect.x=i*80;
+				newDirt.rect.y=j*80;
+				dirt.add(newDirt);
+			}
+		}
 	}
 
 	@Override
@@ -35,17 +46,21 @@ public class MC2D extends ApplicationAdapter {
 		}
 		batch.begin();
 		batch.draw(steve.img,steve.rect.x,steve.rect.y);
-		batch.draw(dirt.img,dirt.rect.x,dirt.rect.y);
+		for(int i=0; i<dirt.size();i++){
+			batch.draw(dirt.get(i).img,dirt.get(i).rect.x,dirt.get(i).rect.y);
+			dirt.get(i).checkForInteraction();
+		}
 		batch.end();
 
 		steve.checkForInput();
-		dirt.checkForInteraction();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
 		steve.img.dispose();
-		dirt.img.dispose();
+		for(int i=0; i<dirt.size();i++){
+			dirt.get(i).img.dispose();
+		}
 	}
 }
