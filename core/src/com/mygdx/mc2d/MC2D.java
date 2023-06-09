@@ -9,14 +9,14 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MC2D extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture img;
 	boolean fullscreen;
+	Player steve;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
 		fullscreen=false;
+		steve=new Player();
 	}
 
 	@Override
@@ -32,13 +32,13 @@ public class MC2D extends ApplicationAdapter {
 			Gdx.graphics.setWindowedMode(1600,900);
 		}
 		batch.begin();
-		batch.draw(img, 0, 0);
+		batch.draw(steve.img,steve.rect.x,steve.rect.y);
 		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
+		steve.img.dispose();
 	}
 }
