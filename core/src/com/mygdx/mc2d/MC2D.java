@@ -23,6 +23,7 @@ public class MC2D extends ApplicationAdapter {
 	Player player;
 	List<Dirt> dirt;
 	List<Grass> grass;
+	List<Stone> stone;
 	Vector3 mousePos;
 	//Icon icon;
 	Rectangle grid;
@@ -45,6 +46,16 @@ public class MC2D extends ApplicationAdapter {
 			}
 		}
 
+		stone=new ArrayList<Stone>();
+		for(int i=0; i<17; i++){
+			for(int j=0; j<3; j++){
+				Stone newStone= new Stone();
+				newStone.rect.x=i*80-1280/2;
+				newStone.rect.y=-560+j*80;
+				stone.add(newStone);
+			}
+		}
+
 		grass=new ArrayList<Grass>();
 		for(int i=0; i<17; i++){
 			Grass newGrass= new Grass();
@@ -52,6 +63,7 @@ public class MC2D extends ApplicationAdapter {
 			newGrass.rect.y=3*80-4*80;
 			grass.add(newGrass);
 		}
+
 		grid= new Rectangle();
 		grid.width=80;
 		grid.height=80;
@@ -90,6 +102,12 @@ public class MC2D extends ApplicationAdapter {
 				newGrass.rect.y=player.gridY;
 				grass.add(newGrass);
 			}
+			if(player.currentBlock==3){
+				Stone newStone= new Stone();
+				newStone.rect.x=player.gridX;
+				newStone.rect.y= player.gridY;
+				stone.add(newStone);
+			}
 		}
 
 		batch.setProjectionMatrix(player.cam.combined);
@@ -122,6 +140,20 @@ public class MC2D extends ApplicationAdapter {
 				batch.draw(grass.get(i).img, grass.get(i).rect.x, grass.get(i).rect.y);
 			}
 		}
+
+		for(int i=0; i<stone.size();i++) {
+			stone.get(i).collisionCheck();
+			if(stone.get(i).rect.contains(mousePos.x,mousePos.y) && Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+				stone.remove(i);
+			}
+
+			else if(stone.get(i).rect.x+stone.get(i).rect.width>player.cam.position.x-player.cam.viewportWidth/2 &&
+					stone.get(i).rect.x<player.cam.position.x+player.cam.viewportWidth/2 &&
+					stone.get(i).rect.y+stone.get(i).rect.width>player.cam.position.y-player.cam.viewportHeight/2 &&
+					stone.get(i).rect.y<player.cam.position.y+player.cam.viewportHeight/2) {
+				batch.draw(stone.get(i).img, stone.get(i).rect.x, stone.get(i).rect.y);
+			}
+		}
 		batch.end();
 
 		batch.setProjectionMatrix(stage.getBatch().getProjectionMatrix());
@@ -144,6 +176,9 @@ public class MC2D extends ApplicationAdapter {
 		}
 		for(int i=0; i<grass.size();i++){
 			grass.get(i).img.dispose();
+		}
+		for(int i=0; i<stone.size();i++){
+			stone.get(i).img.dispose();
 		}
 		//icon.img.dispose();
 	}

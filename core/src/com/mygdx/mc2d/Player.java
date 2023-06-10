@@ -45,5 +45,8 @@ public class Player extends Entity{
         if(Gdx.input.isKeyPressed(Input.Keys.NUM_2)){
             currentBlock=2;
         }
+        if(Gdx.input.isKeyPressed(Input.Keys.NUM_3)){
+            currentBlock=3;
+        }
     }
 }
