@@ -14,15 +14,15 @@ public class Icon {
         rect.y=720-80-3;
         rect.width=80;
         rect.height=80;
-        img=new Texture(Gdx.files.internal("icons/dirt.png"));
+        //img=new Texture(Gdx.files.internal("icons/dirt.png"));
     }
 
     public void update(){
         if(Player.currentBlock==1){
-            img=new Texture(Gdx.files.internal("icons/dirt.png"));
+            //img=new Texture(Gdx.files.internal("icons/dirt.png"));
         }
         else if(Player.currentBlock==2){
-            img=new Texture(Gdx.files.internal("icons/grass.png"));
+            //img=new Texture(Gdx.files.internal("icons/grass.png"));
         }
     }
 }

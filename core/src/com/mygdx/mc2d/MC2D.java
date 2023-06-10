@@ -20,11 +20,11 @@ public class MC2D extends ApplicationAdapter {
 	boolean fullscreen;
 	World world;
 	Stage stage;
-	Player steve;
+	Player player;
 	List<Dirt> dirt;
 	List<Grass> grass;
 	Vector3 mousePos;
-	Icon icon;
+	//Icon icon;
 	Rectangle grid;
 
 	@Override
@@ -33,8 +33,8 @@ public class MC2D extends ApplicationAdapter {
 		fullscreen=false;
 		stage = new Stage();
 		world = new World(new Vector2(0,0),false);
-		steve=new Player();
-		icon=new Icon();
+		player=new Player();
+		//icon=new Icon();
 		dirt=new ArrayList<Dirt>();
 		for(int i=0; i<17; i++){
 			for(int j=0; j<3; j++){
@@ -71,40 +71,40 @@ public class MC2D extends ApplicationAdapter {
 		}
 
 		mousePos=new Vector3(Gdx.input.getX(),Gdx.input.getY(),0);
-		steve.cam.unproject(mousePos);
+		player.cam.unproject(mousePos);
 
-		steve.gridX=(int)Math.floor(mousePos.x/80)*80;
-		steve.gridY=(int)Math.floor(mousePos.y/80)*80;
-		grid.x=steve.gridX;
-		grid.y=steve.gridY;
-		if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && !grid.overlaps(steve.rect)){
-			if(steve.currentBlock==1){
+		player.gridX=(int)Math.floor(mousePos.x/80)*80;
+		player.gridY=(int)Math.floor(mousePos.y/80)*80;
+		grid.x=player.gridX;
+		grid.y=player.gridY;
+		if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && !grid.overlaps(player.rect)){
+			if(player.currentBlock==1){
 				Dirt newDirt= new Dirt();
-				newDirt.rect.x=steve.gridX;
-				newDirt.rect.y=steve.gridY;
+				newDirt.rect.x=player.gridX;
+				newDirt.rect.y=player.gridY;
 				dirt.add(newDirt);
 			}
-			if(steve.currentBlock==2){
+			if(player.currentBlock==2){
 				Grass newGrass= new Grass();
-				newGrass.rect.x=steve.gridX;
-				newGrass.rect.y=steve.gridY;
+				newGrass.rect.x=player.gridX;
+				newGrass.rect.y=player.gridY;
 				grass.add(newGrass);
 			}
 		}
 
-		batch.setProjectionMatrix(steve.cam.combined);
+		batch.setProjectionMatrix(player.cam.combined);
 		batch.begin();
-		batch.draw(steve.img,steve.rect.x,steve.rect.y);
+		batch.draw(player.img,player.rect.x,player.rect.y);
 		for(int i=0; i<dirt.size();i++){
 			dirt.get(i).collisionCheck();
 			if(dirt.get(i).rect.contains(mousePos.x,mousePos.y) && Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
 				dirt.remove(i);
 			}
 
-			else if(dirt.get(i).rect.x+dirt.get(i).rect.width>steve.cam.position.x-steve.cam.viewportWidth/2 &&
-			dirt.get(i).rect.x<steve.cam.position.x+steve.cam.viewportWidth/2 &&
-			dirt.get(i).rect.y+dirt.get(i).rect.width>steve.cam.position.y-steve.cam.viewportHeight/2 &&
-			dirt.get(i).rect.y<steve.cam.position.y+steve.cam.viewportHeight/2){
+			else if(dirt.get(i).rect.x+dirt.get(i).rect.width>player.cam.position.x-player.cam.viewportWidth/2 &&
+			dirt.get(i).rect.x<player.cam.position.x+player.cam.viewportWidth/2 &&
+			dirt.get(i).rect.y+dirt.get(i).rect.width>player.cam.position.y-player.cam.viewportHeight/2 &&
+			dirt.get(i).rect.y<player.cam.position.y+player.cam.viewportHeight/2){
 				batch.draw(dirt.get(i).img,dirt.get(i).rect.x,dirt.get(i).rect.y);
 			}
 		}
@@ -115,10 +115,10 @@ public class MC2D extends ApplicationAdapter {
 				grass.remove(i);
 			}
 
-			else if(grass.get(i).rect.x+grass.get(i).rect.width>steve.cam.position.x-steve.cam.viewportWidth/2 &&
-					grass.get(i).rect.x<steve.cam.position.x+steve.cam.viewportWidth/2 &&
-					grass.get(i).rect.y+grass.get(i).rect.width>steve.cam.position.y-steve.cam.viewportHeight/2 &&
-					grass.get(i).rect.y<steve.cam.position.y+steve.cam.viewportHeight/2) {
+			else if(grass.get(i).rect.x+grass.get(i).rect.width>player.cam.position.x-player.cam.viewportWidth/2 &&
+					grass.get(i).rect.x<player.cam.position.x+player.cam.viewportWidth/2 &&
+					grass.get(i).rect.y+grass.get(i).rect.width>player.cam.position.y-player.cam.viewportHeight/2 &&
+					grass.get(i).rect.y<player.cam.position.y+player.cam.viewportHeight/2) {
 				batch.draw(grass.get(i).img, grass.get(i).rect.x, grass.get(i).rect.y);
 			}
 		}
@@ -126,17 +126,17 @@ public class MC2D extends ApplicationAdapter {
 
 		batch.setProjectionMatrix(stage.getBatch().getProjectionMatrix());
 		batch.begin();
-		batch.draw(icon.img,icon.rect.x,icon.rect.y);
+		//batch.draw(icon.img,icon.rect.x,icon.rect.y);
 		batch.end();
 
-		steve.update();
-		icon.update();
+		player.update();
+		//icon.update();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		steve.img.dispose();
+		player.img.dispose();
 		world.dispose();
 		stage.dispose();
 		for(int i=0; i<dirt.size();i++){
@@ -145,6 +145,6 @@ public class MC2D extends ApplicationAdapter {
 		for(int i=0; i<grass.size();i++){
 			grass.get(i).img.dispose();
 		}
-		icon.img.dispose();
+		//icon.img.dispose();
 	}
 }

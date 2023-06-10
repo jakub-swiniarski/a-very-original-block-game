@@ -17,7 +17,7 @@ public class Player extends Entity{
         rect.height=80;
         rect.x=0;
         rect.y=0;
-        img=new Texture(Gdx.files.internal("entities/steve.png"));
+        img=new Texture(Gdx.files.internal("entities/player.png"));
         cam = new OrthographicCamera(1280,720);
         currentBlock=1;
     }
