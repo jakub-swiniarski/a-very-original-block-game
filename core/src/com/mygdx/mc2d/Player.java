@@ -32,6 +32,13 @@ public class Player extends Entity{
             rect.x-=5;
         }
 
+        if(Gdx.input.isKeyPressed(Input.Keys.UP) && !Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+            rect.y+=5;
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && !Gdx.input.isKeyPressed(Input.Keys.UP)){
+            rect.y-=5;
+        }
+
         if(Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
             currentBlock=1;
         }
