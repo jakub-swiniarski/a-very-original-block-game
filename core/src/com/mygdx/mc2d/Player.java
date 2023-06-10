@@ -4,12 +4,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 
 public class Player extends Entity{
+    static Rectangle rect;
     OrthographicCamera cam;
     static int currentBlock;
     int gridX,gridY;
     public Player(){
+        rect=new Rectangle();
+        rect.width=80;
+        rect.height=80;
+        rect.x=0;
+        rect.y=0;
         img=new Texture(Gdx.files.internal("entities/steve.png"));
         cam = new OrthographicCamera(1280,720);
         currentBlock=1;

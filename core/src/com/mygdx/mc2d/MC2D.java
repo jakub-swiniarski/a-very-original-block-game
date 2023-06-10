@@ -36,7 +36,7 @@ public class MC2D extends ApplicationAdapter {
 		steve=new Player();
 		icon=new Icon();
 		dirt=new ArrayList<Dirt>();
-		for(int i=0; i<16; i++){ //not 16, bc additional column of blocks is needed
+		for(int i=0; i<17; i++){
 			for(int j=0; j<3; j++){
 				Dirt newDirt= new Dirt();
 				newDirt.rect.x=i*80-1280/2;
@@ -46,7 +46,7 @@ public class MC2D extends ApplicationAdapter {
 		}
 
 		grass=new ArrayList<Grass>();
-		for(int i=0; i<16; i++){
+		for(int i=0; i<17; i++){
 			Grass newGrass= new Grass();
 			newGrass.rect.x=i*80-1280/2;
 			newGrass.rect.y=3*80-4*80;
@@ -96,6 +96,7 @@ public class MC2D extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(steve.img,steve.rect.x,steve.rect.y);
 		for(int i=0; i<dirt.size();i++){
+			dirt.get(i).collisionCheck();
 			if(dirt.get(i).rect.contains(mousePos.x,mousePos.y) && Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
 				dirt.remove(i);
 			}
@@ -109,6 +110,7 @@ public class MC2D extends ApplicationAdapter {
 		}
 
 		for(int i=0; i<grass.size();i++) {
+			grass.get(i).collisionCheck();
 			if(grass.get(i).rect.contains(mousePos.x,mousePos.y) && Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
 				grass.remove(i);
 			}

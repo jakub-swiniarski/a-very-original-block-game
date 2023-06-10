@@ -14,4 +14,15 @@ public class Block {
         rect.x=0;
         rect.y=0;
     }
+
+    public void collisionCheck(){
+        if(Player.rect.y<rect.y+rect.height && Player.rect.y+Player.rect.height>rect.y){
+            if(Player.rect.x+Player.rect.width>rect.x && Player.rect.x+Player.rect.width<rect.x+rect.width/2){
+                Player.rect.x=rect.x-Player.rect.width;
+            }
+            if(Player.rect.x<rect.x+rect.width && Player.rect.x>rect.x+rect.width/2){
+                Player.rect.x=rect.x+rect.width;
+            }
+        }
+    }
 }
