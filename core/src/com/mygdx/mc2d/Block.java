@@ -27,6 +27,7 @@ public class Block {
         if(Player.rect.x+Player.rect.width>rect.x && Player.rect.x<rect.x+rect.width){
             if(Player.rect.y<=rect.y+rect.height && Player.rect.y>rect.y+rect.height/2){
                 Player.falling=false;
+                Player.jumping=false;
             }
             if(Player.rect.y+Player.rect.height>rect.y && Player.rect.y+Player.rect.height<rect.y+rect.height/2){
                 Player.rect.y=rect.y-Player.rect.height;
