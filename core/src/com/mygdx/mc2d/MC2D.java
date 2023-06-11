@@ -85,7 +85,7 @@ public class MC2D extends ApplicationAdapter {
 		mousePos=new Vector3(Gdx.input.getX(),Gdx.input.getY(),0);
 		player.cam.unproject(mousePos);
 
-		player.gridX=(int)Math.floor(mousePos.x/80)*80;
+		player.gridX=(int)Math.floor(mousePos.x/80)*80; //FIND A WAY TO PREVENT BLOCKS FROM STACKING ON TOP OF EACH OTHER (RIGHT-CLICKING ON AN EXISTING BLOCK)
 		player.gridY=(int)Math.floor(mousePos.y/80)*80;
 		grid.x=player.gridX;
 		grid.y=player.gridY;

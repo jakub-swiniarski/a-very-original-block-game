@@ -11,15 +11,17 @@ public class Player extends Entity{
     OrthographicCamera cam;
     static int currentBlock;
     int gridX,gridY;
+    static boolean falling;
     public Player(){
         rect=new Rectangle();
         rect.width=80;
         rect.height=80;
         rect.x=0;
-        rect.y=0;
+        rect.y=500;
         img=new Texture(Gdx.files.internal("entities/player.png"));
         cam = new OrthographicCamera(1280,720);
         currentBlock=1;
+        falling = true;
     }
 
     public void update(){
@@ -32,13 +34,6 @@ public class Player extends Entity{
             rect.x-=5;
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.UP) && !Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-            rect.y+=5;
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && !Gdx.input.isKeyPressed(Input.Keys.UP)){
-            rect.y-=5;
-        }
-
         if(Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
             currentBlock=1;
         }
@@ -48,5 +43,10 @@ public class Player extends Entity{
         if(Gdx.input.isKeyPressed(Input.Keys.NUM_3)){
             currentBlock=3;
         }
+
+        if(falling){
+            rect.y-=5;
+        }
+        falling=true;
     }
 }
