@@ -13,6 +13,7 @@ public class Player extends Entity{
     int gridX,gridY;
     static boolean falling,jumping;
     int jumpX;
+    //float dt;
     public Player(){
         rect=new Rectangle();
         rect.width=80;
@@ -30,6 +31,7 @@ public class Player extends Entity{
     public void update(){
         cam.position.set(rect.x+rect.width/2,rect.y+rect.height/2,0);
         cam.update();
+        //dt=Gdx.graphics.getDeltaTime();
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !Gdx.input.isKeyPressed(Input.Keys.LEFT)){
             rect.x+=5;
         }
